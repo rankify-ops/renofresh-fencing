@@ -28,11 +28,11 @@
   var svg = function(k){ return '<svg class="ico" viewBox="0 0 24 24">'+I[k]+'</svg>'; };
 
   var STEPS = [
-    { field:'Fence Type', title:'What do you need?', sub:'Tap one — takes about 30 seconds.', cls:'three', opts:[
+    { field:'Job', title:'What\'s the job?', sub:'Tap one — takes about 30 seconds.', opts:[
+      ['New fence','plus','New fence'],['Replace old fence','swap','Replace an old fence'],['Extend existing','ruler','Extend existing'],['Not sure','q','Not sure yet']]},
+    { field:'Fence Type', title:'What type of fence?', sub:'Not sure? Pick the closest — we\'ll advise on site.', cls:'three', opts:[
       ['Timber Paling','paling','Timber paling'],['Hit & Miss / Slat','slat','Hit &amp; miss / slat'],['Aluminium','alu','Aluminium'],
       ['PVC','pvc','PVC'],['Fence Repair','repair','Repair / storm damage'],['Gate','gate','Gate']]},
-    { field:'Job', title:'Is this a new or replacement fence?', sub:'Helps us plan removal and materials.', skipIf:{ 'Fence Type':'Fence Repair' }, opts:[
-      ['New fence','plus','New fence'],['Replace old fence','swap','Replace an old fence'],['Extend existing','ruler','Extend existing'],['Not sure','q','Not sure yet']]},
     { field:'Approx Length', title:'Roughly how long?', sub:'A best guess is fine — we measure on site.', opts:[
       ['Under 10m','ruler','Under 10m'],['10–30m','ruler','10–30m'],['30m+','ruler','30m+'],['Not sure','q','Not sure']]},
     { field:'Ground', title:'What\'s the ground like?', sub:'Wellington sections are rarely flat — we\'re used to it.', opts:[
@@ -85,7 +85,11 @@
       var slide = el.querySelector('.fslide[data-field="'+field+'"]');
       if(slide) slide.querySelectorAll('.ob').forEach(function(b){ b.classList.toggle('sel', b.dataset.v === value); });
       if(!started){ started = true; track('quote_form_start', { form_location: el.dataset.loc || 'page' }); }
-      if(advance){ if(slide) cs = +slide.dataset.s; next(); }
+      if(advance === 'first'){
+        // "Quote this fence" buttons preselect step 2 — send them to the first unanswered question
+        var open = STEPS.findIndex(function(s, i){ return !fd[s.field] && !skipped(i+1); });
+        show(open === -1 ? TOTAL : open + 1);
+      } else if(advance){ if(slide) cs = +slide.dataset.s; next(); }
     };
     el.querySelectorAll('.ob').forEach(function(b){
       b.addEventListener('click', function(){
@@ -137,7 +141,7 @@
     b.addEventListener('click', function(ev){
       ev.preventDefault();
       var f = forms[0]; if(!f) return;
-      f.pick('Fence Type', b.dataset.quote, true);
+      f.pick('Fence Type', b.dataset.quote, 'first');
       f.el.scrollIntoView({ behavior:'smooth', block:'center' });
     });
   });
