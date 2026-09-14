@@ -28,11 +28,11 @@
   var svg = function(k){ return '<svg class="ico" viewBox="0 0 24 24">'+I[k]+'</svg>'; };
 
   var STEPS = [
-    { field:'Job', title:'What\'s the job?', sub:'Tap one — takes about 30 seconds.', opts:[
-      ['New fence','plus','New fence'],['Replace old fence','swap','Replace an old fence'],['Extend existing','ruler','Extend existing'],['Not sure','q','Not sure yet']]},
-    { field:'Fence Type', title:'What type of fence?', sub:'Not sure? Pick the closest — we\'ll advise on site.', cls:'three', opts:[
+    { field:'Fence Type', title:'What type of fence?', sub:'Tap one — takes about 30 seconds.', cls:'three', opts:[
       ['Timber Paling','paling','Timber paling'],['Hit & Miss / Slat','slat','Hit &amp; miss / slat'],['Aluminium','alu','Aluminium'],
       ['PVC','pvc','PVC'],['Fence Repair','repair','Repair / storm damage'],['Gate','gate','Gate']]},
+    { field:'Job', title:'What\'s the job?', sub:'Not sure? We\'ll advise on site.', opts:[
+      ['New fence','plus','New fence'],['Replace old fence','swap','Replace an old fence'],['Extend existing','ruler','Extend existing'],['Not sure','q','Not sure yet']]},
     { field:'Approx Length', title:'Roughly how long?', sub:'A best guess is fine — we measure on site.', opts:[
       ['Under 10m','ruler','Under 10m'],['10–30m','ruler','10–30m'],['30m+','ruler','30m+'],['Not sure','q','Not sure']]},
     { field:'Ground', title:'What\'s the ground like?', sub:'Wellington sections are rarely flat — we\'re used to it.', opts:[
