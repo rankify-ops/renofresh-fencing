@@ -1,4 +1,4 @@
-// Reno Fresh — Fencing Wellington landing page
+// Reno Fresh: Fencing Wellington landing page
 (function(){
   var CFG = window.RF_CONFIG || {};
   var PHONE = '04 888 9788', TEL = 'tel:+6448889788', EMAIL = 'hi@renofresh.nz';
@@ -28,17 +28,17 @@
   var svg = function(k){ return '<svg class="ico" viewBox="0 0 24 24">'+I[k]+'</svg>'; };
 
   var STEPS = [
-    { field:'Job', title:'What\'s the job?', sub:'Tap one — takes about 30 seconds.', opts:[
+    { field:'Job', title:'What\'s the job?', sub:'Tap one. Takes about 30 seconds.', opts:[
       ['New fence','plus','New fence'],['Replace old fence','swap','Replace an old fence'],['Extend existing','ruler','Extend existing'],['Not sure','q','Not sure yet']]},
-    { field:'Fence Type', title:'What type of fence?', sub:'Not sure? Pick the closest — we\'ll advise on site.', cls:'three', opts:[
+    { field:'Fence Type', title:'What type of fence?', sub:'Not sure? Pick the closest and we\'ll advise on site.', cls:'three', opts:[
       ['Timber Paling','paling','Timber paling'],['Hit & Miss / Slat','slat','Hit &amp; miss / slat'],['Aluminium','alu','Aluminium'],
       ['PVC','pvc','PVC'],['Fence Repair','repair','Repair / storm damage'],['Gate','gate','Gate']]},
-    { field:'Approx Length', title:'Roughly how long?', sub:'A best guess is fine — we measure on site.', opts:[
-      ['Under 10m','ruler','Under 10m'],['10–30m','ruler','10–30m'],['30m+','ruler','30m+'],['Not sure','q','Not sure']]},
-    { field:'Ground', title:'What\'s the ground like?', sub:'Wellington sections are rarely flat — we\'re used to it.', opts:[
+    { field:'Approx Length', title:'Roughly how long?', sub:'A best guess is fine, we measure on site.', opts:[
+      ['Under 10m','ruler','Under 10m'],['10-30m','ruler','10-30m'],['30m+','ruler','30m+'],['Not sure','q','Not sure']]},
+    { field:'Ground', title:'What\'s the ground like?', sub:'Wellington sections are rarely flat. We\'re used to it.', opts:[
       ['Flat','flat','Mostly flat'],['Sloped','slope','Sloped'],['Retaining wall','wall','Retaining wall involved'],['Not sure','q','Not sure']]},
-    { field:'Timeline', title:'When would you like it done?', sub:'No pressure — pricing-only enquiries are welcome.', opts:[
-      ['ASAP','bolt','ASAP'],['Within a month','cal','Within a month'],['1–3 months','clock','1–3 months'],['Just getting prices','tag','Just getting prices']]}
+    { field:'Timeline', title:'When would you like it done?', sub:'No pressure, pricing-only enquiries are welcome.', opts:[
+      ['ASAP','bolt','ASAP'],['Within a month','cal','Within a month'],['1-3 months','clock','1-3 months'],['Just getting prices','tag','Just getting prices']]}
   ];
   var TOTAL = STEPS.length + 1;
 
@@ -56,7 +56,7 @@
       '<textarea class="finp" name="Notes" placeholder="Anything else? e.g. shared boundary, dog, old fence removal" aria-label="Notes"></textarea>'+
       '<input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">'+
       '<div class="fnav"><button type="button" class="fb">&larr; Back</button><button type="submit" class="fn">Get My Free Quote &rarr;</button></div></form>';
-    h += '<div class="fslide" data-s="done"><div class="qf-done"><div class="ok">&#10003;</div><h4>Thanks — you\'re all set!</h4><p>Your fence details are with the Reno Fresh team and we\'ll be in touch shortly. Want to talk it through now?</p><a class="btn btn-p" href="'+TEL+'">Call '+PHONE+'</a></div></div>';
+    h += '<div class="fslide" data-s="done"><div class="qf-done"><div class="ok">&#10003;</div><h4>Thanks, you\'re all set!</h4><p>Your fence details are with the Reno Fresh team and we\'ll be in touch shortly. Want to talk it through now?</p><a class="btn btn-p" href="'+TEL+'">Call '+PHONE+'</a></div></div>';
     h += '<div class="qf-foot">'+svg('lock')+' Free, no-obligation quote. We respect your privacy.</div>';
     el.innerHTML = h;
   };
@@ -86,7 +86,7 @@
       if(slide) slide.querySelectorAll('.ob').forEach(function(b){ b.classList.toggle('sel', b.dataset.v === value); });
       if(!started){ started = true; track('quote_form_start', { form_location: el.dataset.loc || 'page' }); }
       if(advance === 'first'){
-        // "Quote this fence" buttons preselect step 2 — send them to the first unanswered question
+        // "Quote this fence" buttons preselect step 2, so send them to the first unanswered question
         var open = STEPS.findIndex(function(s, i){ return !fd[s.field] && !skipped(i+1); });
         show(open === -1 ? TOTAL : open + 1);
       } else if(advance){ if(slide) cs = +slide.dataset.s; next(); }
@@ -116,7 +116,7 @@
       if(bad){ err('Please fill in the highlighted fields so we can send your quote.'); return; }
       if(form.botcheck.checked){ show('done'); return; }
       var fallback = 'Sorry, that didn\'t send. Please call <a href="'+TEL+'">'+PHONE+'</a> or email <a href="mailto:'+EMAIL+'">'+EMAIL+'</a>.';
-      var payload = { subject:'New fencing quote request — '+(fd['Fence Type']||'Fencing')+' ('+form.Suburb.value.trim()+')', from_name:'Reno Fresh Fencing Landing Page', Page: location.href };
+      var payload = { subject:'New fencing quote request: '+(fd['Fence Type']||'Fencing')+' ('+form.Suburb.value.trim()+')', from_name:'Reno Fresh Fencing Landing Page', Page: location.href };
       STEPS.forEach(function(s){ if(fd[s.field]) payload[s.field] = fd[s.field]; });
       ['Name','Phone','Email','Suburb','Notes'].forEach(function(k){ if(form[k].value.trim()) payload[k] = form[k].value.trim(); });
       payload.email = payload.Email; payload.replyto = payload.Email;
